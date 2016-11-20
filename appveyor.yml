@@ -1,6 +1,7 @@
 version: '1.0.{build}'
 configuration:
 - Debug
+- Release
 platform: Any CPU
 environment:
   # Don't report back to the mothership
@@ -8,11 +9,11 @@ environment:
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 build_script:
-- dotnet build "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-dependencies --version-suffix $Env:APPVEYOR_BUILD_NUMBER
+- dotnet build "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-dependencies --version-suffix %APPVEYOR_BUILD_NUMBER%
 after_build:
-- dotnet pack "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-build --version-suffix $Env:APPVEYOR_BUILD_NUMBER -o artifacts
+- dotnet pack "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-build --version-suffix %APPVEYOR_BUILD_NUMBER% -o artifacts
 test_script:
-- xunit.console .\test\IdentityServer4.Mock.Tests\bin\%CONFIGURATION%\netcoreapp1.0\IdentityServer4.Mock.Tests.dll /appveyor
+- dotnet test "test\IdentityServer4.Mock.Tests" -c %CONFIGURATION%
 artifacts:
 - path: artifacts\**\*.*
 deploy:
@@ -23,3 +24,4 @@ deploy:
   artifact: /.*\.nupkg/
   on:
     branch: master
+    configuration: Release
