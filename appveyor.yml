@@ -4,15 +4,15 @@ configuration:
 platform: Any CPU
 environment:
   # Don't report back to the mothership
-  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1  
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 build_script:
-- dotnet build "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-dependencies
+- dotnet build "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-dependencies --version-suffix $Env:APPVEYOR_BUILD_NUMBER
 after_build:
-- dotnet pack "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-build  -o artifacts
+- dotnet pack "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-build --version-suffix $Env:APPVEYOR_BUILD_NUMBER -o artifacts
 test_script:
-- dotnet test -c %CONFIGURATION% --no-build .\test\IdentityServer4.Mock.Tests
+- xunit.console .\test\IdentityServer4.Mock.Tests\bin\%CONFIGURATION%\netcoreapp1.0\IdentityServer4.Mock.Tests.dll /appveyor
 artifacts:
 - path: artifacts\**\*.*
 deploy:
