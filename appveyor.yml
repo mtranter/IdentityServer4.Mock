@@ -8,9 +8,9 @@ environment:
 before_build:
 - appveyor-retry dotnet restore -v Minimal
 build_script:
-- dotnet build "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+- dotnet build "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-dependencies
 after_build:
-- dotnet pack "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o artifacts
+- dotnet pack "src\IdentityServer4.Mock" -c %CONFIGURATION% --no-build  -o artifacts
 test_script:
 - dotnet test -c %CONFIGURATION% --no-build .\test\IdentityServer4.Mock.Tests
 artifacts:
