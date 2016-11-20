@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "IdentityServer4": "1.0.0-rc3",
+    "Microsoft.AspNetCore.TestHost": "1.0.0"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+    }
+  }
+}
