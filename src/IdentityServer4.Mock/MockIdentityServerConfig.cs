@@ -14,11 +14,18 @@ namespace IdentityServer4.Mock
             return this;
         }
 
-        public IMockIdentityServerConfig AddScopes(params Scope[] scopes)
+        public IMockIdentityServerConfig AddIdentityResources(params IdentityResource[] identityResources)
         {
-            Scopes = scopes;
+            IdentityResources = identityResources;
             return this;
         }
+
+        public IMockIdentityServerConfig AddApiResources(params ApiResource[] apiResources)
+        {
+            ApiResources = apiResources;
+            return this;
+        }
+
 
         public IMockIdentityServerConfig AddUsers(params InMemoryUser[] users)
         {
@@ -39,7 +46,9 @@ namespace IdentityServer4.Mock
         }
 
         internal Client[] Clients { get; private set; } = new Client[]{};
-        internal Scope[] Scopes { get; private set; }= new Scope[]{};
+        internal ApiResource[] ApiResources { get; private set; }= new ApiResource[]{};
+
+        internal IdentityResource[] IdentityResources { get; private set; }= new IdentityResource[]{};
         internal InMemoryUser[] Users { get; private set; }= new InMemoryUser[]{};
 
         internal Action<IApplicationBuilder> AppConfig { get; private set; } = _ => {};

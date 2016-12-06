@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace IdentityServer4.Mock
 {
@@ -29,11 +30,15 @@ namespace IdentityServer4.Mock
             var server = new TestServer(new WebHostBuilder().Configure(app => {
                 app.UseIdentityServer();
                 cfg.AppConfig(app);
+                app.ApplicationServices.GetRequiredService<ILoggerFactory>().AddConsole();
             }).ConfigureServices(s => {
                 var idServerCfg = s.AddIdentityServer();
+                s.AddLogging();
+                
                 idServerCfg
                     .AddInMemoryClients(cfg.Clients)
-                    .AddInMemoryScopes(cfg.Scopes)
+                    .AddInMemoryIdentityResources(cfg.IdentityResources)
+                    .AddInMemoryApiResources(cfg.ApiResources)
                     .AddInMemoryUsers(cfg.Users.ToList())
                     .AddTemporarySigningCredential()
                     .AddDefaultSecretParsers()
@@ -41,6 +46,7 @@ namespace IdentityServer4.Mock
                     .AddDefaultEndpoints();
                 cfg.ServiceConfig(s);
             }));
+  
 
             return new MockIdentityServer(server);
         }

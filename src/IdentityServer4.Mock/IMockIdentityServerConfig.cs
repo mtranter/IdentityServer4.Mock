@@ -10,7 +10,9 @@ namespace IdentityServer4.Mock
     {
            IMockIdentityServerConfig AddClients(params Client[] clients);
 
-           IMockIdentityServerConfig AddScopes(params Scope[] scopes);
+           IMockIdentityServerConfig AddIdentityResources(params IdentityResource[] identityResources);
+
+           IMockIdentityServerConfig AddApiResources(params ApiResource[] apiResources);
 
            IMockIdentityServerConfig AddUsers(params InMemoryUser[] users);
 

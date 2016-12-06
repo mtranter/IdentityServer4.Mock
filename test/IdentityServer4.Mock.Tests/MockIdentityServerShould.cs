@@ -15,10 +15,10 @@ namespace IdentityServer4.Mock.Tests
         public MockIdentityServerShould()
         {
             _sut = MockIdentityServer.Configure(c => {
-                c.AddScopes(new Scope(){ 
+                c.AddApiResources(new ApiResource(){ 
                     Name = "testscope",
-                    Type = ScopeType.Resource,
-                    ScopeSecrets = new[]{new Secret("scopesecret".Sha256())}
+                    Scopes = new[]{new Scope("testscope")},
+                    ApiSecrets = new[]{new Secret("apisecret".Sha256())}
                     })
                 .AddClients(new Client(){
                     ClientId = "testclient",
@@ -63,7 +63,7 @@ namespace IdentityServer4.Mock.Tests
             var tokenResponse = await tokenClient.RequestClientCredentialsAsync("testscope");
             Assert.Equal(HttpStatusCode.OK, tokenResponse.HttpStatusCode);
 
-            var introClient = new IntrospectionClient(disco.IntrospectionEndpoint, "testscope", "scopesecret", proxyHandler);
+            var introClient = new IntrospectionClient(disco.IntrospectionEndpoint, "testscope","apisecret", proxyHandler);
             var introResponse = await introClient.SendAsync(new IntrospectionRequest(){
                 ClientId = "testclient",
                 Token = tokenResponse.AccessToken
