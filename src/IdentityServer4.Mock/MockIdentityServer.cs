@@ -30,7 +30,10 @@ namespace IdentityServer4.Mock
             var server = new TestServer(new WebHostBuilder().Configure(app => {
                 app.UseIdentityServer();
                 cfg.AppConfig(app);
-                app.ApplicationServices.GetRequiredService<ILoggerFactory>().AddConsole();
+                if(cfg.UseRequestLogging)
+                {
+                    app.ApplicationServices.GetRequiredService<ILoggerFactory>().AddConsole();
+                }
             }).ConfigureServices(s => {
                 var idServerCfg = s.AddIdentityServer();
                 if(cfg.UseRequestLogging)
