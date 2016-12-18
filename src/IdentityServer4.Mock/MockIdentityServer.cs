@@ -33,7 +33,10 @@ namespace IdentityServer4.Mock
                 app.ApplicationServices.GetRequiredService<ILoggerFactory>().AddConsole();
             }).ConfigureServices(s => {
                 var idServerCfg = s.AddIdentityServer();
-                s.AddLogging();
+                if(cfg.UseRequestLogging)
+                {
+                    s.AddLogging();
+                }
                 
                 idServerCfg
                     .AddInMemoryClients(cfg.Clients)

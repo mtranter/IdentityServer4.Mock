@@ -45,6 +45,14 @@ namespace IdentityServer4.Mock
             return this;
         }
 
+        public IMockIdentityServerConfig WithRequestLogging()
+        {
+            UseRequestLogging = true;
+            return this;
+        }
+
+        internal bool UseRequestLogging {get; private set;} = false;
+
         internal Client[] Clients { get; private set; } = new Client[]{};
         internal ApiResource[] ApiResources { get; private set; }= new ApiResource[]{};
 

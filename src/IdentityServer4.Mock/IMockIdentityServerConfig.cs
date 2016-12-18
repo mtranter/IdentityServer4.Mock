@@ -19,5 +19,7 @@ namespace IdentityServer4.Mock
            IMockIdentityServerConfig Configure(Action<IApplicationBuilder> appCfg);
 
            IMockIdentityServerConfig Services(Action<IServiceCollection> servivceCfg);
+
+           IMockIdentityServerConfig WithRequestLogging();
     }
 }
