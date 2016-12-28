@@ -3,6 +3,7 @@ using IdentityServer4.Models;
 using IdentityServer4.Services.InMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IdentityServer4.Mock
 {
@@ -21,5 +22,8 @@ namespace IdentityServer4.Mock
            IMockIdentityServerConfig Services(Action<IServiceCollection> servivceCfg);
 
            IMockIdentityServerConfig WithRequestLogging();
+
+	       IMockIdentityServerConfig AddSigningCredential(SigningCredentials credentials);
+
     }
 }
