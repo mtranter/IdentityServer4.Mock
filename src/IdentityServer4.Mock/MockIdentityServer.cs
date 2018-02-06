@@ -45,7 +45,7 @@ namespace IdentityServer4.Mock
                     .AddInMemoryClients(cfg.Clients)
                     .AddInMemoryIdentityResources(cfg.IdentityResources)
                     .AddInMemoryApiResources(cfg.ApiResources)
-                    .AddInMemoryUsers(cfg.Users.ToList())
+                    .AddTestUsers(cfg.Users.ToList())
                     //.AddTemporarySigningCredential()
                     .AddDefaultSecretParsers()
                     .AddDefaultSecretValidators()
@@ -56,7 +56,7 @@ namespace IdentityServer4.Mock
 		}
 		else
 		{
-		    idServerCfg.AddTemporarySigningCredential();
+		    idServerCfg.AddDeveloperSigningCredential();
 		}
                 cfg.ServiceConfig(s);
             }));
