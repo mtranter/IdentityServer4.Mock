@@ -1,6 +1,6 @@
 using System;
 using IdentityServer4.Models;
-using IdentityServer4.Services.InMemory;
+using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -28,7 +28,7 @@ namespace IdentityServer4.Mock
         }
 
 
-        public IMockIdentityServerConfig AddUsers(params InMemoryUser[] users)
+        public IMockIdentityServerConfig AddUsers(params TestUser[] users)
         {
             Users = users;
             return this;
@@ -66,7 +66,7 @@ namespace IdentityServer4.Mock
         internal ApiResource[] ApiResources { get; private set; }= new ApiResource[]{};
 
         internal IdentityResource[] IdentityResources { get; private set; }= new IdentityResource[]{};
-        internal InMemoryUser[] Users { get; private set; }= new InMemoryUser[]{};
+        internal TestUser[] Users { get; private set; }= new TestUser[]{};
 
         internal Action<IApplicationBuilder> AppConfig { get; private set; } = _ => {};
 

@@ -1,6 +1,6 @@
 using System;
 using IdentityServer4.Models;
-using IdentityServer4.Services.InMemory;
+using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -15,7 +15,7 @@ namespace IdentityServer4.Mock
 
            IMockIdentityServerConfig AddApiResources(params ApiResource[] apiResources);
 
-           IMockIdentityServerConfig AddUsers(params InMemoryUser[] users);
+           IMockIdentityServerConfig AddUsers(params TestUser[] users);
 
            IMockIdentityServerConfig Configure(Action<IApplicationBuilder> appCfg);
 
