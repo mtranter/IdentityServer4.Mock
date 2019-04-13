@@ -32,7 +32,7 @@ namespace IdentityServer4.Mock
                 cfg.AppConfig(app);
                 if(cfg.UseRequestLogging)
                 {
-                    app.ApplicationServices.GetRequiredService<ILoggerFactory>().AddConsole();
+                    app.ApplicationServices.GetRequiredService<ILoggingBuilder>().AddConsole();
                 }
             }).ConfigureServices(s => {
                 var idServerCfg = s.AddIdentityServer();
