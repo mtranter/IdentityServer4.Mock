@@ -3,7 +3,7 @@ Mock Identity Server for Integration testing
 
 ## Usage
 
-####Creating a mock identity server
+#### Creating a mock identity server
 
 ```cs
     var identityServer = MockIdentityServer.Configure(c => {
@@ -21,7 +21,7 @@ Mock Identity Server for Integration testing
     }).Start();
 ```
 
-####Authenticating a client
+#### Authenticating a client
 
 ```cs
     var proxyHandler = identityServer.CreateHandler();
