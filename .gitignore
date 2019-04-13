@@ -1,2 +1,9 @@
 bin/
 obj/
+.idea/
+backup/
+
+
+*.user
+
+src/IdentityServer4\.Mock/\.vs/
